@@ -1,4 +1,4 @@
-<script setup  lang="ts">
+<script setup lang="ts">
 import type { CardType } from "~/types/CardType";
 const card = ref<CardType>({
   suit: "Heart",
@@ -10,8 +10,6 @@ const onClick = (cardType: CardType) => {
 </script>
 <template>
   <svg>
-    <CardElement :card="card" :x="0" :y="0"
-    @clickCard="onClick"
-    />
+    <CardElement :card="card" :x="0" :y="0" @clickCard="onClick" />
   </svg>
 </template>

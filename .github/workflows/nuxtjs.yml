@@ -74,6 +74,8 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
         env: 
           NUXT_APP_BASE_URL: /solitaire/
+      - name: copy index.html
+        run: cp ./dist/200.html ./dist/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

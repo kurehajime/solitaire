@@ -1,9 +1,9 @@
 <script setup>
-import MyComponent from './components/MyComponent.vue'
+import GameElement from './components/GameElement.vue'
 </script>
 <template>
   <div>
     ほげえええｐ
-    <MyComponent></MyComponent>
+    <GameElement></GameElement>
   </div>
 </template>

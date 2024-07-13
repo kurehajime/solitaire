@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { CardType } from "~/types/CardType";
-const card = ref<CardType>({
+import type { Card } from "~/types/Card";
+const card = ref<Card>({
   suit: "Heart",
   rank: 1,
 });
-const onClick = (cardType: CardType) => {
-  console.log(cardType.suit, cardType.rank);
+const onClick = (card: Card) => {
+  console.log(card.suit, card.rank);
 };
 </script>
 <template>

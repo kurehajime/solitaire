@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { CardType } from "~/types/CardType";
+import type { Card } from "~/types/Card";
 
-const props = defineProps<{ card: CardType, x: number, y: number }>();
+const props = defineProps<{ card: Card, x: number, y: number }>();
 const emits = defineEmits<{
-  (e: 'clickCard', cardType: CardType): void
+  (e: 'clickCard', card: Card): void
 }>()
 
 </script>

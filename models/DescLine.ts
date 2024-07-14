@@ -53,6 +53,12 @@ export default class DescLine extends Stack<DescLine> {
         return true;
     }
     
+    Put(cards: Card[]): DescLine {
+        const next = this.Clone();
+        next.open.push(...cards);
+        return next;
+    }
+
     private isDownRank(top: Rank, bottom: Rank): boolean {
         return top === bottom + 1;
     }

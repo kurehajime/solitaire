@@ -25,6 +25,13 @@ export class GameManager {
                     this.ResetHover();
                 }
                 break;
+            case "Next":
+                if (hover.length === 0) {
+                    next.Deck = next.Deck.Open(3);
+                } else {
+                    this.ResetHover();
+                }
+                break;
             case "DescLine":
                 if (hover.length === 0) {
                     if (next.DescLines[col].CanPick(row)) {

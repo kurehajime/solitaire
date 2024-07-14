@@ -7,54 +7,45 @@ import type { Target } from '~/types/Target';
 export class GameManager {
     constructor(
         public Deck: Deck,
-        public DescLine: DescLine,
-        public AscLine: AscLine,
+        public DescLines: DescLine[],
+        public AscLines: AscLine[],
     ) {
     }
 
-    Action(target: Target, index: number): GameManager {
+    Action(target: Target, col: number, row: number): GameManager {
         const next = this.Clone();
-        const hoverOwner = next.HoverOwer();
+        const hover = this.GetHover();
         switch (target) {
             case "Deck":
-                if (hoverOwner === null) {
-                    next.Reset();
-                } else {
-                    // Deckから引く
-                    if(this.Deck.CanPick()){
-                        next.Deck = this.Deck.Pick();
+                if (hover.length === 0) {
+                    if (next.Deck.CanPick()) {
+                        next.Deck = next.Deck.Pick();
                     }
+                } else {
+                    this.ResetHover();
                 }
                 break;
             case "DescLine":
-                if (hoverOwner === null) {
-                    // Descから引く
-                    if(this.DescLine.CanPick(index)){
-                        next.DescLine = this.DescLine.Pick(index);
+                if (hover.length === 0) {
+                    if (next.DescLines[col].CanPick(row)) {
+                        next.DescLines[col] = next.DescLines[col].Pick(row);
                     }
-                } else if (hoverOwner === "DescLine") {
-                    next.Reset();
                 } else {
-                    // Descに置く
-                    if(this.DescLine.CanPut(next.GetHover())){
-                        next.DescLine = this.DescLine.Put(next.GetHover());
-                        next.Reset();
+                    if (next.DescLines[col].CanPut(hover)) {
+                        next.DescLines[col] = next.DescLines[col].Put(hover);
+                        next.ResetHover();
                     }
                 }
                 break;
             case "AscLine":
-                if (hoverOwner === null) {
-                    // Ascから引く
-                    if(this.AscLine.CanPick()){
-                        next.AscLine = this.AscLine.Pick();
+                if (hover.length === 0) {
+                    if (next.AscLines[col].CanPick()) {
+                        next.AscLines[col] = next.AscLines[col].Pick();
                     }
-                } else if (hoverOwner === "AscLine") {
-                    next.Reset();
                 } else {
-                    // Ascに置く
-                    if(this.AscLine.CanPut(next.GetHover())){
-                        next.AscLine = this.AscLine.Put(next.GetHover());
-                        next.Reset();
+                    if (next.AscLines[col].CanPut(hover)) {
+                        next.AscLines[col] = next.AscLines[col].Put(hover);
+                        next.ResetHover();
                     }
                 }
                 break;
@@ -62,41 +53,32 @@ export class GameManager {
         return next;
     }
 
-    Reset(): GameManager {
-        return new GameManager(
-            this.Deck.Reset(),
-            this.DescLine.Reset(),
-            this.AscLine.Reset(),
-        );
-    }
-
-    HasHover(): boolean {
-        return this.Deck.HasHover() || this.DescLine.HasHover() || this.AscLine.HasHover();
-    }
-
-    HoverOwer(): Target | null {
-        if (this.Deck.HasHover()) {
-            return "Deck";
+    ResetHover(): GameManager {
+        const next = this.Clone();
+        for (const i in next.DescLines) {
+            next.DescLines[i] = next.DescLines[i].Reset();
         }
-        if (this.DescLine.HasHover()) {
-            return "DescLine";
+        for (const i in next.AscLines) {
+            next.AscLines[i] = next.AscLines[i].Reset();
         }
-        if (this.AscLine.HasHover()) {
-            return "AscLine";
-        }
-        return null;
+        next.Deck = next.Deck.Reset();
+        return next;
     }
 
     GetHover(): Card[] {
         const hover: Card[] = [];
+        for (const line of this.DescLines) {
+            if (line.HasHover()) {
+                hover.push(line.hover[0]);
+            }
+        }
+        for (const line of this.AscLines) {
+            if (line.HasHover()) {
+                hover.push(line.hover[0]);
+            }
+        }
         if (this.Deck.HasHover()) {
-            hover.push(...this.Deck.hover);
-        }
-        if (this.DescLine.HasHover()) {
-            hover.push(...this.DescLine.hover);
-        }
-        if (this.AscLine.HasHover()) {
-            hover.push(...this.AscLine.hover);
+            hover.push(this.Deck.hover[0]);
         }
 
         return hover;
@@ -105,8 +87,8 @@ export class GameManager {
     Clone(): GameManager {
         return new GameManager(
             this.Deck.Clone(),
-            this.DescLine.Clone(),
-            this.AscLine.Clone(),
+            this.DescLines.map(line => line.Clone()),
+            this.AscLines.map(line => line.Clone()),
         );
     }
 }

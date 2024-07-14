@@ -1,8 +1,8 @@
 import Stack from './Stack';
 
 export default class Deck extends Stack<Deck>{
-    Pickable(): boolean {
-        if (this.isHover()){
+    CanPick(): boolean {
+        if (this.IsHover()){
             return false;
         }
         if (this.open.length === 0){
@@ -13,7 +13,7 @@ export default class Deck extends Stack<Deck>{
     }
 
     Pick(): Deck {
-        const next = this.clone();
+        const next = this.Clone();
         const card = next.open.pop();
         if (card !== undefined){
             next.hover.push(card);
@@ -22,7 +22,7 @@ export default class Deck extends Stack<Deck>{
     }
 
     Open(count : number ): Deck {
-        const next = this.clone();
+        const next = this.Clone();
         // 山札がからの場合はオープンカードを山に戻す
         if (next.reverse.length === 0){
             next.reverse = next.open.reverse();

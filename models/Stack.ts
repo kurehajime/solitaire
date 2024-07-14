@@ -10,11 +10,11 @@ export default class Stack<T extends Stack<T>> {
 
     }
 
-    isHover(): boolean {
+    IsHover(): boolean {
         return this.hover.length !== 0;
     }
 
-    clone(): T {
+    Clone(): T {
         return this.constructor(
             this.reverse.map(card => ({ ...card })),
             this.open.map(card => ({ ...card })),

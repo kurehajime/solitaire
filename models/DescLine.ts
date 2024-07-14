@@ -5,7 +5,7 @@ import type { Rank } from '~/types/Rank';
 
 export default class DescLine extends Stack<DescLine> {
     CanPick(index: number): boolean {
-        if (this.IsHover()) {
+        if (this.HasHover()) {
             return false;
         }
         if (this.open.length <= index) {
@@ -52,7 +52,7 @@ export default class DescLine extends Stack<DescLine> {
         }
         return true;
     }
-    
+
     Put(cards: Card[]): DescLine {
         const next = this.Clone();
         next.open.push(...cards);

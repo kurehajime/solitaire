@@ -10,8 +10,15 @@ export default class Stack<T extends Stack<T>> {
 
     }
 
-    IsHover(): boolean {
+    HasHover(): boolean {
         return this.hover.length !== 0;
+    }
+
+    Reset(): T {
+        const next = this.Clone();
+        next.open.push(...next.hover);
+        next.hover = [];
+        return next;
     }
 
     Clone(): T {

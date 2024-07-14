@@ -2,7 +2,7 @@ import Stack from './Stack';
 
 export default class Deck extends Stack<Deck>{
     CanPick(): boolean {
-        if (this.IsHover()){
+        if (this.HasHover()){
             return false;
         }
         if (this.open.length === 0){

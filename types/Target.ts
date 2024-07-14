@@ -1,0 +1,1 @@
+export type Target = "AscLine" |  "DescLine" | "Deck";

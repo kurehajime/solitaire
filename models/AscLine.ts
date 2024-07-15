@@ -18,12 +18,12 @@ export default class AscLine extends Stack<AscLine> {
     }
 
     CanPut(cards: Card[]): boolean {
-        if(cards.length !== 1){
+        if (cards.length !== 1) {
             return false;
         }
         const hover = cards[0];
-        if(this.open.length === 0 && hover.rank === 1){
-            return true;
+        if (this.open.length === 0) {
+            return hover.rank === 1;
         }
         const line = this.open[this.open.length - 1];
         if (!this.isUpRank(line.rank, hover.rank)) {

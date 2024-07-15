@@ -19,12 +19,13 @@ const getX = () => {
 }
 
 const getY = (reverse: boolean, index: number) => {
-    const rev = (props.desc.reverse.length - 1) * 30;
-    const y = 200 + index * 30;
-    if (!reverse) {
+    if(reverse) {
+        return 220 + index * 3;
+    }else{
+        const rev = 220 + (props.desc.reverse.length - 1) * 3;
+        const y =  index * 30;
         return y + rev;
     }
-    return y;
 }
 
 </script>

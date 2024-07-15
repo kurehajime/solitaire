@@ -29,7 +29,7 @@ const getY = (reverse: boolean, index: number) => {
 
 </script>
 <template>
-    <g v-for="(card, index) in props.desc.open">
+    <g v-for="(card, index) in props.desc.reverse">
         <CardElement :card="card" :x="getX()" :y="getY(true, index)" :open="false" />
     </g>
     <g v-for="(card, index) in props.desc.open">

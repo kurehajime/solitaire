@@ -3,6 +3,8 @@ import DescLine from './DescLine';
 import AscLine from './AscLine';
 import type { Card } from '~/types/Card';
 import type { Target } from '~/types/Target';
+import type { Suit } from '~/types/Suit';
+import type { Rank } from '~/types/Rank';
 
 export class GameManager {
     constructor(
@@ -123,5 +125,45 @@ export class GameManager {
             this.DescLines.map(line => line.Clone()),
             this.AscLines.map(line => line.Clone()),
         );
+    }
+
+    static Init(): GameManager {
+        const cards = GameManager.Shuffle(GameManager.getAllCards());
+        const descLines = [] as DescLine[];
+        for (let i = 0; i < 7; i++) {
+            const reverse = cards.splice(0, i + 1);
+            descLines.push(new DescLine(reverse, [], []));
+        }
+        const ascLines = [] as AscLine[];
+        for (let i = 0; i < 4; i++) {
+            ascLines.push(new AscLine([], [], []));
+        }
+        const deck = new Deck(cards, [], []);
+        const gameManager = new GameManager(deck, descLines, ascLines);
+        gameManager.CleanUp();
+        return gameManager;
+    }
+
+    static Shuffle(cards: Card[]): Card[] {
+        const result = [...cards];
+        for (let i = result.length - 1; i >= 0; i--) {
+            const r = Math.floor(Math.random() * (i + 1))
+            const tmp = result[i]
+            result[i] = result[r]
+            result[r] = tmp
+        }
+        return result;
+    }
+
+    static getAllCards(): Card[] {
+        const cards = [] as Card[];
+        const suits: Suit[] = ["Spade", "Heart", "Diamond", "Club"];
+        const ranks: Rank[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+        for (const suit of suits) {
+            for (const rank of ranks) {
+                cards.push({ suit, rank });
+            }
+        }
+        return cards;
     }
 }

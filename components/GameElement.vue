@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import type AscLine from "~/models/AscLine";
 import type DescLine from "~/models/DescLine";
-import type { GameManager } from "~/models/GameManager";
-import Sample from "~/models/Sample";
+import { GameManager } from "~/models/GameManager";
 const mouseX = ref(0);
 const mouseY = ref(0);
 const svg = ref<SVGAElement>();
-const gameManager = ref<GameManager>(Sample.GetSample());
+const gameManager = ref<GameManager>(GameManager.Init());
 const next = () => {
   gameManager.value = gameManager.value.Action("Next");
 };

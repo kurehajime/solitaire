@@ -40,4 +40,23 @@ export default class Deck extends Stack<Deck>{
 
         return next;
     }
+
+    HasNext(): boolean {
+        return this.reverse.length !== 0;
+    }
+
+    Reset(): Deck {
+        const next = this.Clone();
+        next.open.push(...next.hover);
+        next.hover = [];
+        return next;
+    }
+
+    Clone(): Deck {
+        return new Deck(
+            this.reverse.map(card => ({ ...card })),
+            this.open.map(card => ({ ...card })),
+            this.hover.map(card => ({ ...card })),
+        );
+    }
 }

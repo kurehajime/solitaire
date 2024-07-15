@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { Card } from "~/types/Card";
-const card = ref<Card>({
-  suit: "Heart",
-  rank: 1,
-});
-const onClick = (card: Card) => {
-  console.log(card.suit, card.rank);
+import type { GameManager } from "~/models/GameManager";
+import Sample from "~/models/Sample";
+const gameManager = ref<GameManager>(Sample.GetSample());
+const next = () => {
+  gameManager.value = gameManager.value.Action("Next");
 };
 </script>
 <template>
-  <svg>
-    <CardElement :card="card" :x="0" :y="0" @clickCard="onClick" />
+  <svg width="800" height="800">
+    <NextElement :deck="gameManager.Deck"
+      @next="next"
+    ></NextElement>
   </svg>
 </template>

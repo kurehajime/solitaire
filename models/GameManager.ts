@@ -12,7 +12,7 @@ export class GameManager {
     ) {
     }
 
-    Action(target: Target, col: number, row: number): GameManager {
+    Action(target: Target, col: number | null = null, row: number | null = null): GameManager {
         const next = this.Clone();
         const hover = this.GetHover();
         switch (target) {
@@ -33,6 +33,9 @@ export class GameManager {
                 }
                 break;
             case "DescLine":
+                if(col === null || row === null) {
+                    return next;
+                }
                 if (hover.length === 0) {
                     if (next.DescLines[col].CanPick(row)) {
                         next.DescLines[col] = next.DescLines[col].Pick(row);
@@ -45,6 +48,9 @@ export class GameManager {
                 }
                 break;
             case "AscLine":
+                if(col === null || row === null) {
+                    return next;
+                }
                 if (hover.length === 0) {
                     if (next.AscLines[col].CanPick()) {
                         next.AscLines[col] = next.AscLines[col].Pick();

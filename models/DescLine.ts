@@ -64,6 +64,21 @@ export default class DescLine extends Stack<DescLine> {
         next.open.push(...cards);
         return next;
     }
+    
+    Reset(): DescLine {
+        const next = this.Clone();
+        next.open.push(...next.hover);
+        next.hover = [];
+        return next;
+    }
+
+    Clone(): DescLine {
+        return new DescLine(
+            this.reverse.map(card => ({ ...card })),
+            this.open.map(card => ({ ...card })),
+            this.hover.map(card => ({ ...card })),
+        );
+    }
 
     private isDownRank(top: Rank, bottom: Rank): boolean {
         return top === bottom + 1;

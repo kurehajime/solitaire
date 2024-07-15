@@ -2,9 +2,13 @@
 import type { Card } from "~/types/Card";
 const props = defineProps<{ card: Card | null, x: number, y: number }>();
 </script>
-
+<style scoped>
+.card {
+  user-select: none;
+}
+</style>
 <template>
-  <g v-if="props.card">
+  <g v-if="props.card" class="card">
     <rect :x="x" :y="y" width="100" height="180" fill="green"
       stroke="black" />
     @click="emits('clickCard', props.card)" />

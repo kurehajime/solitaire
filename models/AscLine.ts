@@ -57,7 +57,7 @@ export default class AscLine extends Stack<AscLine> {
     }
 
     private isUpRank(top: Rank, bottom: Rank): boolean {
-        return top === bottom + 1;
+        return top === bottom - 1;
     }
 
     private isSameSuit(suit1: Suit, suit2: Suit): boolean {

@@ -22,14 +22,14 @@ export class GameManager {
                         next.Deck = next.Deck.Pick();
                     }
                 } else {
-                    this.ResetHover();
+                    next.ResetHover();
                 }
                 break;
             case "Next":
                 if (hover.length === 0) {
                     next.Deck = next.Deck.Open(3);
                 } else {
-                    this.ResetHover();
+                    next.ResetHover();
                 }
                 break;
             case "DescLine":
@@ -43,12 +43,12 @@ export class GameManager {
                 } else {
                     if (next.DescLines[col].CanPut(hover)) {
                         next.DescLines[col] = next.DescLines[col].Put(hover);
-                        next.ResetHover();
+                        next.RemoveHover();
                     }
                 }
                 break;
             case "AscLine":
-                if(col === null || row === null) {
+                if(col === null) {
                     return next;
                 }
                 if (hover.length === 0) {
@@ -58,7 +58,7 @@ export class GameManager {
                 } else {
                     if (next.AscLines[col].CanPut(hover)) {
                         next.AscLines[col] = next.AscLines[col].Put(hover);
-                        next.ResetHover();
+                        next.RemoveHover();
                     }
                 }
                 break;
@@ -77,6 +77,16 @@ export class GameManager {
             this.AscLines[i] = this.AscLines[i].Reset();
         }
         this.Deck = this.Deck.Reset();
+    }
+
+    private RemoveHover(){
+        for (const i in this.DescLines) {
+            this.DescLines[i].hover = [];
+        }
+        for (const i in this.AscLines) {
+            this.AscLines[i].hover = [];
+        }
+        this.Deck.hover = [];
     }
 
     GetHover(): Card[] {

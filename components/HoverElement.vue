@@ -11,7 +11,7 @@ const getX = (index: number) => {
 }
 
 const getY = (index: number) => {
-    return props.mouseY + index + 10;
+    return props.mouseY + 10 + index * 30;
 }
 
 </script>

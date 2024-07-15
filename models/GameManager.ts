@@ -102,16 +102,16 @@ export class GameManager {
         const hover: Card[] = [];
         for (const line of this.DescLines) {
             if (line.HasHover()) {
-                hover.push(line.hover[0]);
+                hover.push(...line.hover);
             }
         }
         for (const line of this.AscLines) {
             if (line.HasHover()) {
-                hover.push(line.hover[0]);
+                hover.push(...line.hover);
             }
         }
         if (this.Deck.HasHover()) {
-            hover.push(this.Deck.hover[0]);
+            hover.push(...this.Deck.hover);
         }
 
         return hover;

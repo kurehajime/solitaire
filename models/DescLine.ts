@@ -13,7 +13,7 @@ export default class DescLine extends Stack<DescLine> {
         }
         let prev = this.open[index];
         for (let i = index + 1; i < this.open.length; i++) {
-            if (this.isDownRank(prev.rank, this.open[i].rank)) {
+            if (!this.isDownRank(prev.rank, this.open[i].rank)) {
                 return false;
             }
             prev = this.open[i];

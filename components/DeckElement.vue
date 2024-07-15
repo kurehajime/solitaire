@@ -24,6 +24,6 @@ const getY = (index: number) => {
 </script>
 <template>
     <g v-for="(card, index) in props.deck.open">
-        <CardElement :card="card" :x="getX(index)" :y="getY(index)" @click="onClick(index)" />
+        <CardElement :card="card" :x="getX(index)" :y="getY(index)" @click="onClick(index)" :open="true" />
     </g>
 </template>

@@ -33,11 +33,11 @@ export class GameManager {
                 }
                 break;
             case "DescLine":
-                if(col === null || row === null) {
+                if (col === null) {
                     return next;
                 }
                 if (hover.length === 0) {
-                    if (next.DescLines[col].CanPick(row)) {
+                    if (row !== null && next.DescLines[col].CanPick(row)) {
                         next.DescLines[col] = next.DescLines[col].Pick(row);
                     }
                 } else {
@@ -48,7 +48,7 @@ export class GameManager {
                 }
                 break;
             case "AscLine":
-                if(col === null) {
+                if (col === null) {
                     return next;
                 }
                 if (hover.length === 0) {
@@ -69,7 +69,7 @@ export class GameManager {
         return next;
     }
 
-    private ResetHover(){
+    private ResetHover() {
         for (const i in this.DescLines) {
             this.DescLines[i] = this.DescLines[i].Reset();
         }
@@ -79,7 +79,7 @@ export class GameManager {
         this.Deck = this.Deck.Reset();
     }
 
-    private RemoveHover(){
+    private RemoveHover() {
         for (const i in this.DescLines) {
             this.DescLines[i].hover = [];
         }

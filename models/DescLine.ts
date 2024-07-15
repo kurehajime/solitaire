@@ -42,12 +42,12 @@ export default class DescLine extends Stack<DescLine> {
     }
 
     CanPut(cards: Card[]): boolean {
-        if (cards.length !== 1) {
+        if (cards.length === 0) {
             return false;
         }
         const hover = cards[0];
-        if(this.open.length === 0 && hover.rank === 13){
-            return true;
+        if (this.open.length === 0) {
+            return hover.rank === 13;
         }
         const line = this.open[this.open.length - 1];
         if (!this.isDownRank(line.rank, hover.rank,)) {
@@ -64,7 +64,7 @@ export default class DescLine extends Stack<DescLine> {
         next.open.push(...cards);
         return next;
     }
-    
+
     Reset(): DescLine {
         const next = this.Clone();
         next.open.push(...next.hover);

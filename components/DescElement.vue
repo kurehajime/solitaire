@@ -7,33 +7,36 @@ const props = defineProps<{
 }>();
 
 const emits = defineEmits<{
-    (e: 'desc', col: number, row: number): void
+    (e: 'desc', col: number, row: number | null): void
 }>()
 
-const onClick = (index: number) => {
+const onClick = (index: number | null) => {
     emits('desc', props.col, index);
 };
 
 const getX = () => {
-    return 200 + props.col * 110;
+    return 20 + props.col * 110;
 }
 
 const getY = (reverse: boolean, index: number) => {
-    if(reverse) {
+    if (reverse) {
         return 220 + index * 3;
-    }else{
+    } else {
         const rev = 220 + (props.desc.reverse.length - 1) * 3;
-        const y =  index * 30;
+        const y = index * 30;
         return y + rev;
     }
 }
 
 </script>
 <template>
-    <g v-for="(card, index) in props.desc.reverse">
-        <CardElement :card="card" :x="getX()" :y="getY(true, index)" :open="false" />
-    </g>
-    <g v-for="(card, index) in props.desc.open">
-        <CardElement :card="card" :x="getX()" :y="getY(false, index)" @click="onClick(index)" :open="true" />
+    <g>
+        <CardElement :card="null" :x="getX()" :y="getY(true, 0)" @click="onClick(null)" :open="true"></CardElement>
+        <g v-for="(card, index) in props.desc.reverse">
+            <CardElement :card="card" :x="getX()" :y="getY(true, index)" :open="false" @click="onClick(null)" />
+        </g>
+        <g v-for="(card, index) in props.desc.open">
+            <CardElement :card="card" :x="getX()" :y="getY(false, index)" @click="onClick(index)" :open="true" />
+        </g>
     </g>
 </template>

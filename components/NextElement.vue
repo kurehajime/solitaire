@@ -2,7 +2,7 @@
 import type Deck from '~/models/Deck';
 const props = defineProps<{ deck: Deck }>();
 const emits = defineEmits<{
-  (e: 'next'): void
+    (e: 'next'): void
 }>()
 
 const next = () => {

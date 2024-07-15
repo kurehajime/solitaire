@@ -10,7 +10,7 @@ const emits = defineEmits<{
     (e: 'asc', col: number): void
 }>()
 
-const onClick = (index: number) => {
+const onClick = () => {
     emits('asc', props.col);
 };
 
@@ -25,7 +25,10 @@ const getY = (index: number) => {
 
 </script>
 <template>
-    <g v-for="(card, index) in props.asc.open">
-        <CardElement :card="card" :x="getX()" :y="getY(index)" @click="onClick(index)" :open="true" />
+    <g>
+        <CardElement :card="null" :x="getX()" :y="getY(0)" @click="onClick()" :open="true"></CardElement>
+        <g v-for="(card, index) in props.asc.open">
+            <CardElement :card="card" :x="getX()" :y="getY(index)" @click="onClick()" :open="true" />
+        </g>
     </g>
 </template>

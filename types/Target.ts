@@ -1,1 +1,1 @@
-export type Target = "AscLine" |  "DescLine" | "Deck" | "Next";
+export type Target = "AscLine" |  "DescLine" | "Deck" | "Next" | "None";

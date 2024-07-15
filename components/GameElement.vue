@@ -13,7 +13,7 @@ const next = () => {
 const deck = () => {
   gameManager.value = gameManager.value.Action("Deck");
 }
-const desc = (col: number, row: number) => {
+const desc = (col: number, row: number | null) => {
   gameManager.value = gameManager.value.Action("DescLine", col, row);
 }
 const asc = (col: number) => {
@@ -21,7 +21,7 @@ const asc = (col: number) => {
 }
 
 const mousemove = (e: MouseEvent) => {
-  if(svg.value){
+  if (svg.value) {
     const rect = svg.value.getBoundingClientRect();
     mouseX.value = e.clientX - rect.left;
     mouseY.value = e.clientY - rect.top;
@@ -30,7 +30,7 @@ const mousemove = (e: MouseEvent) => {
 
 </script>
 <template>
-  <svg ref="svg" width="800" height="800" @mousemove="mousemove" >
+  <svg ref="svg" width="800" height="800" @mousemove="mousemove">
     <NextElement :deck="gameManager.Deck" @next="next"></NextElement>
     <DeckElement :deck="gameManager.Deck" @deck="deck" />
     <g v-for="(descLine, index) in gameManager.DescLines">
@@ -39,10 +39,6 @@ const mousemove = (e: MouseEvent) => {
     <g v-for="(ascLine, index) in gameManager.AscLines">
       <AscElement :asc="ascLine as AscLine" :col="index" @asc="asc" />
     </g>
-    <HoverElement
-      :cards="gameManager.GetHover()"
-      :mouseX="mouseX"
-      :mouseY="mouseY"
-    />
+    <HoverElement :cards="gameManager.GetHover()" :mouseX="mouseX" :mouseY="mouseY" />
   </svg>
 </template>

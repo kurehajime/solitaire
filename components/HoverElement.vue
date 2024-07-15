@@ -7,11 +7,11 @@ const props = defineProps<{
 }>();
 
 const getX = (index: number) => {
-    return props.mouseX;
+    return props.mouseX + 10;
 }
 
 const getY = (index: number) => {
-    return props.mouseY + index + 30;
+    return props.mouseY + index + 10;
 }
 
 </script>

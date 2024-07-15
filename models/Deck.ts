@@ -31,6 +31,7 @@ export default class Deck extends Stack<Deck>{
         }
         // 山札が残ってるとき
         next.reverse.unshift(...next.open.reverse());
+        next.open = [];
         for (let i = 0; i < count; i++){
             const card = next.reverse.pop();
             if (card !== undefined){

@@ -5,11 +5,14 @@ const gameManager = ref<GameManager>(Sample.GetSample());
 const next = () => {
   gameManager.value = gameManager.value.Action("Next");
 };
+const deck = (row: number) => {
+  gameManager.value = gameManager.value.Action("Deck", null, row);
+}
 </script>
 <template>
   <svg width="800" height="800">
-    <NextElement :deck="gameManager.Deck"
-      @next="next"
-    ></NextElement>
+    <NextElement :deck="gameManager.Deck" @next="next"></NextElement>
+    <DeckElement :deck="gameManager.Deck" @deck="deck" />
+
   </svg>
 </template>

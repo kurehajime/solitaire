@@ -22,7 +22,7 @@ const getY = (reverse: boolean, index: number) => {
     if (reverse) {
         return 220 + index * 3;
     } else {
-        const rev = 220 + (props.desc.reverse.length - 1) * 3;
+        const rev = 220 + (props.desc.reverse.length) * 3;
         const y = index * 30;
         return y + rev;
     }

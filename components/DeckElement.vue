@@ -4,11 +4,13 @@ const props = defineProps<{
     deck: Deck
 }>();
 const emits = defineEmits<{
-    (e: 'deck',  row: number): void
+    (e: 'deck'): void
 }>()
 
 const onClick = (index: number) => {
-    emits('deck', index);
+    if(index === props.deck.open.length - 1){
+        emits('deck');
+    }
 };
 
 const getX = (index: number) => {

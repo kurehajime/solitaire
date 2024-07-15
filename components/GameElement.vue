@@ -5,8 +5,8 @@ const gameManager = ref<GameManager>(Sample.GetSample());
 const next = () => {
   gameManager.value = gameManager.value.Action("Next");
 };
-const deck = (row: number) => {
-  gameManager.value = gameManager.value.Action("Deck", null, row);
+const deck = () => {
+  gameManager.value = gameManager.value.Action("Deck");
 }
 </script>
 <template>

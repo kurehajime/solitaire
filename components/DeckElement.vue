@@ -8,13 +8,13 @@ const emits = defineEmits<{
 }>()
 
 const onClick = (index: number) => {
-    if(index === props.deck.open.length - 1){
+    if (index === props.deck.open.length - 1) {
         emits('deck');
     }
 };
 
 const getX = (index: number) => {
-    return 110 + index * 40;
+    return 130 + index * 40;
 }
 
 const getY = (index: number) => {

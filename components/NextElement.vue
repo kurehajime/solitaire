@@ -19,5 +19,5 @@ const onClick = () => {
 
 </script>
 <template>
-    <CardElement :card="next()" :x="0" :y="0" @click="onClick" :open="false" />
+    <CardElement :card="next()" :x="20" :y="0" @click="onClick" :open="false" />
 </template>

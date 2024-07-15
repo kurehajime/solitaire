@@ -7,7 +7,7 @@ const props = defineProps<{
 }>();
 
 const getX = (index: number) => {
-    return props.mouseX + 10;
+    return props.mouseX - 30;
 }
 
 const getY = (index: number) => {

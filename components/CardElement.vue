@@ -22,7 +22,19 @@ const getSuit = computed(() => {
   return "";
 });
 
-const getColor = computed(() => props.open ? "green" : "red");
+const getColor = computed(() => {
+  if (props.card) {
+    switch (props.card.suit) {
+      case "Heart":
+      case "Diamond":
+        return "red";
+      case "Club":
+      case "Spade":
+        return "black";
+    }
+  }
+  return "";
+});
 </script>
 <style scoped>
 .card {
@@ -31,9 +43,9 @@ const getColor = computed(() => props.open ? "green" : "red");
 </style>
 <template>
   <g v-if="props.card" class="card">
-    <rect :x="x" :y="y" width="100" height="180" :fill="getColor" stroke="black" />
-    <text :x="x + 10" :y="y + 20" fill="white">{{ getSuit }}</text>
-    <text :x="x + 10" :y="y + 40" fill="white">{{ props.card.rank }}</text>
-    <text :x="x + 40" :y="y + 20" fill="white">{{ props.card.rank }}</text>
+    <rect :x="x" :y="y" width="100" height="180" fill="white" stroke="black" />
+    <text v-if="props.open" :x="x + 10" :y="y + 20" :fill="getColor">{{ getSuit }}</text>
+    <text v-if="props.open" :x="x + 10" :y="y + 40" :fill="getColor">{{ props.card.rank }}</text>
+    <text v-if="props.open" :x="x + 40" :y="y + 20" :fill="getColor">{{ props.card.rank }}</text>
   </g>
 </template>

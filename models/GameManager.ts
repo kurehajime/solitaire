@@ -62,20 +62,21 @@ export class GameManager {
                     }
                 }
                 break;
+            case "None":
+                next.ResetHover();
+                break;
         }
         return next;
     }
 
-    ResetHover(): GameManager {
-        const next = this.Clone();
-        for (const i in next.DescLines) {
-            next.DescLines[i] = next.DescLines[i].Reset();
+    private ResetHover(){
+        for (const i in this.DescLines) {
+            this.DescLines[i] = this.DescLines[i].Reset();
         }
-        for (const i in next.AscLines) {
-            next.AscLines[i] = next.AscLines[i].Reset();
+        for (const i in this.AscLines) {
+            this.AscLines[i] = this.AscLines[i].Reset();
         }
-        next.Deck = next.Deck.Reset();
-        return next;
+        this.Deck = this.Deck.Reset();
     }
 
     GetHover(): Card[] {

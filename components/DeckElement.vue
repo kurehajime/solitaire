@@ -18,7 +18,7 @@ const getX = (index: number) => {
 }
 
 const getY = (index: number) => {
-    return 0;
+    return 10;
 }
 
 </script>

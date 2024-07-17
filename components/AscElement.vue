@@ -19,7 +19,7 @@ const getX = () => {
 }
 
 const getY = (index: number) => {
-    const y = index * 3;
+    const y = 10 + index * 3;
     return y;
 }
 

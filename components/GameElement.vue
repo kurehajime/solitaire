@@ -30,6 +30,7 @@ const mousemove = (e: MouseEvent) => {
 </script>
 <template>
   <svg ref="svg" width="800" height="800" @mousemove="mousemove">
+    <rect width="800" height="800" fill="green" />
     <NextElement :deck="gameManager.Deck" @next="next"></NextElement>
     <DeckElement :deck="gameManager.Deck" @deck="deck" />
     <g v-for="(descLine, index) in gameManager.DescLines">

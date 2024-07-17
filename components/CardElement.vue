@@ -44,7 +44,9 @@ const getColor = computed(() => {
 <template>
   <g>
     <g v-if="props.card" class="card">
-      <rect :x="x" :y="y" width="100" height="180" fill="white" stroke="black" />
+      <image v-if="!props.open" href="@/assets/images/back.png" :x="x" :y="y" width="100" height="180" />
+      <rect :x="x" :y="y" width="100" height="180" fill="transparent" stroke="darkgray" />
+      <rect v-if="props.open" :x="x" :y="y" width="100" height="180" fill="white" />
       <text v-if="props.open" :x="x + 10" :y="y + 20" :fill="getColor">{{ getSuit }}</text>
       <text v-if="props.open" :x="x + 10" :y="y + 40" :fill="getColor">{{ props.card.rank }}</text>
       <text v-if="props.open" :x="x + 40" :y="y + 20" :fill="getColor">{{ props.card.rank }}</text>
